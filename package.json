@@ -1,0 +1,19 @@
+{
+  "name": "do_self",
+  "version": "0.0.0",
+  "description": "Following along TDD",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    "jison": "0.4.x",
+    "nodemon": "1.x",
+    "mocha": "1.x"
+  },
+  "keywords": [
+    "parser"
+  ],
+  "author": "Jesus Salazar",
+  "license": "ISC"
+}
