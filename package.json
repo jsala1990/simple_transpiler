@@ -1,5 +1,5 @@
 {
-  "name": "do_self",
+  "name": "simple_transpiler",
   "version": "0.0.0",
   "description": "Following along TDD",
   "main": "index.js",

@@ -14,9 +14,13 @@ SELECTOR              (\.|\#|\:\:|\:){NAME}   // matches: .class, #id, :hover, :
 // Numbers
 {NUMBER}(px)          return 'DIMENSION' // 10px
 {NUMBER}              return 'NUMBER'
+\#[0-9A-Fa-f]{3,6}    return 'COLOR'
 
 // Selectors
+
+{NAME}{SELECTOR}      return 'SELECTOR'
 {NAME}                return 'IDENTIFIER' // 10px, 1em, 50%
+{SELECTOR}            return 'SELECTOR'
 
 .                     return yytext // Everything else
 
