@@ -6,8 +6,17 @@
 
 %%
 
+stylesheet:
+  rules EOF                         { return new nodes.StyleSheet($1) }
+;
+
+rules:
+  rule                              { $$ = [ $1 ] }
+| rules rule                        { $$ = $1.concat($2) }
+;
+
 rule:
-  selector '{' properties '}'       { return new nodes.Rule($1, $3)}
+  selector '{' properties '}'       { $$ = new nodes.Rule($1, $3) }
 ;
 
 selector:
@@ -19,10 +28,16 @@ properties:
   /* empty */                        { $$ = [] }
 | property                           { $$ = [ $1 ] }
 | properties ';' property            { $$ = $1.concat($3) }
+| properties ';'                     { $$ = $1 }
 ;
 
 property:
-  IDENTIFIER ':' value           { $$ = new nodes.Property($1, $3) }
+  IDENTIFIER ':' values          { $$ = new nodes.Property($1, $3) }
+;
+
+values:
+  value                          { $$ = [ $1 ] }
+| values value                   { $$ = $1.concat($2) }
 ;
 
 value:
