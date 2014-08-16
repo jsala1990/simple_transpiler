@@ -55,6 +55,15 @@ describe('Parser', function() {
      )
   });
 
+  describe('it parses selectors', function() {
+    itParsesSelector('h1');
+    itParsesSelector('#id');
+    itParsesSelector('.class');
+    itParsesSelector('h1.class');
+    itParsesSelector('a:hover');
+    itParsesSelector('::after');
+  })
+
   describe('values', function() {
     it('should parse colors correctly in properties', function() {
       assert.deepEqual(parser.parse('h1 { color: #f0f0f0 }'),
@@ -63,9 +72,12 @@ describe('Parser', function() {
       ))
     })
 
+    it('should parse colors', function() {
+      assert.deepEqual(parseValues('#f0f0f0'), ['#f0f0f0']);
+    })
+
     it('should parse dimensions', function() {
-      assert.deepEqual(parseValues('10px 1.2em 5.1%'), ['10px', '1.2em', '5.1%']
-                      );
+      assert.deepEqual(parseValues('10px 1.2em 5.1%'), ['10px', '1.2em', '5.1%']);
     })
   })
 
@@ -88,11 +100,12 @@ describe('Parser', function() {
     return parseDirective('property: ' + values).values
   }
 
-//  describe('selector', function() {
-//    it('parses h1 and #id', function() {
-//      var actual = parser.parse('h1').rules[0]
-//      assert.equal(actual, 'h1 {}');
-//    });
-//  });
+  function itParsesSelector(selector) {
+    it('parses ' + selector + ' selector', function() {
+      var actual = parseRule(selector + ' {}').selector
+      assert.equal(actual, selector);
+    })
+  }
+
 })
 

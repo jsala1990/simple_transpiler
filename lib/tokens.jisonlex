@@ -12,7 +12,7 @@ SELECTOR              (\.|\#|\:\:|\:){NAME}   // matches: .class, #id, :hover, :
 \s+                   //ignore all white spaces, bc CSS
 
 // Numbers
-{NUMBER}(px)          return 'DIMENSION' // 10px
+{NUMBER}(px|em|\%)          return 'DIMENSION' // 10px 4em
 {NUMBER}              return 'NUMBER'
 \#[0-9A-Fa-f]{3,6}    return 'COLOR'
 
